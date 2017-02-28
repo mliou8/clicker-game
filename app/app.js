@@ -51,11 +51,6 @@ function registerServiceWorker() {
 
   app.increment = function () {
     app.count++;
-    
-    idbKeyval.set('hello', 'world')
-      .then(() => console.log('It worked!'))
-      .catch(err => console.log('It failed!', err));
-      
     document.getElementById("scoreCounter").innerHTML = app.count;
   }
   //Add listener onto increment button
