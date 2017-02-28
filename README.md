@@ -1,4 +1,5 @@
 # Clicker-game
+Initialized using PWA skeleton app: > A simple set of skeleton files for shipping a [Progressive Web App](https://developers.google.com/web/progressive-web-apps)
 
 Feature List:
 
