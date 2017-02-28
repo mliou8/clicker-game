@@ -230,6 +230,7 @@ body {
 
 .buy-list {
   padding-left: 14px;
+  list-style: none;
 }
 
 .buy-list > li {

@@ -46,17 +46,50 @@ function registerServiceWorker() {
   var app = {
     isLoading: true,
     spinner: document.querySelector('.loader'),
-    count: 0
+    count: 0,
+    basicStores: 0,
   };
+  
 
+  app.updateGameState = function () {
+    setInterval(function () {
+      app.updateScore();
+      document.getElementById("scoreCounter").innerHTML = Math.floor(app.count);
+      document.getElementById("bStoreCounter").innerHTML = app.basicStores;
+    }, 350)
+  }
+  
+  app.updateScore = function () {
+    app.count = app.count + (app.basicStores * .3)
+  }
+  
   app.increment = function () {
     app.count++;
     document.getElementById("scoreCounter").innerHTML = app.count;
   }
+  
+  app.incrementStores = function () {
+    
+    if (app.count < 15) {
+      alert("You can't afford this sry");
+    } else {
+      app.count = app.count - 15;
+      app.basicStores++;
+    }
+    document.getElementById("bStoreCounter").innerHTML = app.basicStores;
+  }
+  
   //Add listener onto increment button
   document.getElementById('increment').addEventListener('click', function() {
     app.increment();
   });
+  
+  //Add Listener onto basic store
+  document.getElementById('basic-store').addEventListener('click', function() {
+    app.incrementStores();
+  })
+  
+  app.updateGameState();
 })();
 
 
