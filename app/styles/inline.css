@@ -228,13 +228,35 @@ body {
   border-radius: 1.5px;
 }
 
+.right {
+  display: block;
+  position: relative;
+  right: 0px;
+  top: 50px;
+  float: right;
+}
+
 .buy-list {
   padding-left: 14px;
   list-style: none;
+  font-size: 12px;
+}
+
+.buy-list .btn {
+  font-size: 12px;
 }
 
 .buy-list > li {
   text-align: left;
+  padding-bottom: 3px;
+}
+
+.store-list {
+  list-style-type: none;
+}
+
+.store-list > li {
+  padding-bottom: 5px;
 }
 
 .main-click-container {

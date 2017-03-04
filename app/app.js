@@ -47,48 +47,64 @@ function registerServiceWorker() {
     isLoading: true,
     spinner: document.querySelector('.loader'),
     count: 0,
-    basicStores: 0,
+    storeOne: 0,
+    storeTwo: 0,
+    storeThree: 0,
+    storeFour: 0,
+    storeFive: 0,
   };
   
+  app.storeCost = {
+    storeOne: 15,
+    storeTwo: 50,
+    storeThree: 100,
+    storeFour: 200,
+    storeFive: 1000
+  }
 
   app.updateGameState = function () {
     setInterval(function () {
       app.updateScore();
       document.getElementById("scoreCounter").innerHTML = Math.floor(app.count);
-      document.getElementById("bStoreCounter").innerHTML = app.basicStores;
+      document.getElementById("storeOneCounter").innerHTML = app.basicStores;
     }, 350)
   }
   
   app.updateScore = function () {
-    app.count = app.count + (app.basicStores * .3)
+    app.count = app.count + (app.storeOne * .3) + (app.storeTwo * .5) + (app.storeThree * 1) + (app.storeFour * 1.2) + (app.storeFive * 2.5);
   }
   
   app.increment = function () {
-    app.count++;
     document.getElementById("scoreCounter").innerHTML = app.count;
-  }
-  
-  app.incrementStores = function () {
-    
-    if (app.count < 15) {
-      alert("You can't afford this sry");
-    } else {
-      app.count = app.count - 15;
-      app.basicStores++;
+    e = e || window.event;
+    e = e.target || e.srcElement;
+    if (e.nodeName === 'BUTTON') {
+        alert(e.id);
     }
-    document.getElementById("bStoreCounter").innerHTML = app.basicStores;
   }
   
-  //Add listener onto increment button
-  document.getElementById('increment').addEventListener('click', function() {
-    app.increment();
-  });
+  app.incrementStores = function (e) {
+    // 
+    // if (app.count < 15) {
+    //   alert("You can't afford this sry");
+    // } else {
+    //   app.count = app.count - 15;
+    //   app.basicStores++;
+    // }
+
+    // console.log("Button clicked, id "+this.id+", text"+this.innerHTML);
+    // document.getElementById("bStoreCounter").innerHTML = app.basicStores;
+  }
   
-  //Add Listener onto basic store
-  document.getElementById('basic-store').addEventListener('click', function() {
-    app.incrementStores();
+  //Adding store increment 
+  $('increment, #store-1, #store-2, #store-3, #store-4, #store-5').on('click', function (e) {
+     app.increment(e);  
   })
+  // document.getElementById('store-1').addEventListener('click', function(e) {
+  //   app.incrementStores(e);
+  // });
   
+  //Run turn cycle
   app.updateGameState();
 })();
 
