@@ -52,29 +52,39 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <main class="main">
     <div class="container">
       <div class="row">
-        <div class="col-xs-6 buy-menu">
+        <div class="col-xs-6 left buy-menu">
           <h3> Buy Menu </h3>
           <ul class="buy-list">
-            <li> Item 1 </li>
-            <li> Item 2 </li>
-            <li> Item 3 </li>
-            <li> Item 4 </li>
-            <li> Item 5 </li>
+            <li> <button class="btn btn-success" id="storeOne">7-11</button>Cost: 15</li>
+            <li> <button class="btn btn-success" id="storeTwo">Kraspy Krame</button>Cost: 50 </li>
+            <li> <button class="btn btn-success" id="storeThree">Donkin' Donutz</button>Cost: 100</li>
+            <li> <button class="btn btn-success" id="storeFour">Online Donutz Store<button>Cost: 200</li>
+            <li> <button class="btn btn-success" id="storeFive">Become Amazon</button>Cost: 1000</li>
           </ul>
         </div>
-        <div class="col-xs-offset-2 col-xs-4 score-container">
-          <h3> You are currently at [<span id="scoreCounter">0</span>] Donuts </h3>
+        <div class= "col-xs-offset-2 col-xs-4 right">
+          <ul class="store-list">
+            <li>[<span id="storeOneCounter">0</span>] 7-11's</li>
+            <li>[<span id="storeTwoCounter">0</span>] Kraspy Krame</li>
+            <li>[<span id="storeThreeCounter">0</span>] Donkin' Donutz</li>
+            <li>[<span id="storeFourCounter">0</span>] Online Storez</li>
+            <li>[<span id="storeFiveCounter">0</span>] Amazons</li>
+          </ul>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-offset-8 col-xs-2 main-click-container">
-          <button class="btn btn-default" id="increment">Click Here!</button>
+          <button class="btn btn-default" id="increment">Bake Donutz!</button>
         </div>
       </div>
       <div class="row">
+        <div class="col-xs-offset-2 col-xs-4 score-container">
+          <h3> You are currently at [<span id="scoreCounter">0</span>] Donuts </h3>
+        </div>
       </div>
     </div>
   </main>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="app.js"> </script>
 </body>
 
