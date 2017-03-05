@@ -66,7 +66,6 @@ function registerServiceWorker() {
     setInterval(function () {
       app.updateScore();
       document.getElementById("scoreCounter").innerHTML = Math.floor(app.count);
-      document.getElementById("storeOneCounter").innerHTML = app.basicStores;
     }, 350)
   }
   
@@ -74,35 +73,74 @@ function registerServiceWorker() {
     app.count = app.count + (app.storeOne * .3) + (app.storeTwo * .5) + (app.storeThree * 1) + (app.storeFour * 1.2) + (app.storeFive * 2.5);
   }
   
-  app.increment = function () {
-    document.getElementById("scoreCounter").innerHTML = app.count;
+  app.bake = function () {
+    app.count++;
+    document.getElementById("increment").innerHtml = app.count;
+  }
+  
+  app.increment = function (e) {
     e = e || window.event;
     e = e.target || e.srcElement;
-    if (e.nodeName === 'BUTTON') {
-        alert(e.id);
+    
+    switch (e.id) {
+      case 'storeOne':
+        if (app.count < app.storeCost.storeOne) {
+          alert ("You can't afford this!");
+        } else {
+          console.log("storeOne")
+          app.count = app.count - app.storeCost.storeOne
+          app.storeOne++;
+        }
+        break;
+      case 'storeTwo':
+        if (app.count < app.storeCost.storeTwo) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeTwo
+          app.storeTwo++;
+        }
+        break;
+      case 'storeThree':
+        if (app.count < app.storeCost.storeThree) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeThree
+          app.storeThree++;
+        }
+        break;
+      case 'storeFour':
+        if (app.count < app.storeCost.storeFour) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeFour
+          app.storeFour++;
+        }
+        break;
+      case 'storeFive':
+        if (app.count < app.storeCost.storeFive) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeFive
+          app.storeFive++;
+        }
+        break;
+      default:
+        return;
     }
+    document.getElementById("storeOneCounter").innerHTML = app.storeOne;
+    document.getElementById("storeTwoCounter").innerHTML = app.storeTwo;
+    document.getElementById("storeThreeCounter").innerHTML = app.storeThree;
+    document.getElementById("storeFourCounter").innerHTML = app.storeFour;
+    document.getElementById("storeFiveCounter").innerHTML = app.storeFive;
   }
-  
-  app.incrementStores = function (e) {
-    // 
-    // if (app.count < 15) {
-    //   alert("You can't afford this sry");
-    // } else {
-    //   app.count = app.count - 15;
-    //   app.basicStores++;
-    // }
 
-    // console.log("Button clicked, id "+this.id+", text"+this.innerHTML);
-    // document.getElementById("bStoreCounter").innerHTML = app.basicStores;
-  }
-  
   //Adding store increment 
-  $('increment, #store-1, #store-2, #store-3, #store-4, #store-5').on('click', function (e) {
+  $('#storeOne, #storeTwo, #storeThree, #storeFour, #storeFive').on('click', function (e) {
      app.increment(e);  
   })
-  // document.getElementById('store-1').addEventListener('click', function(e) {
-  //   app.incrementStores(e);
-  // });
+  $('#increment').on('click', function () {
+    app.bake();
+  })
   
   //Run turn cycle
   app.updateGameState();
