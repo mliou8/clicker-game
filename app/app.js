@@ -47,48 +47,102 @@ function registerServiceWorker() {
     isLoading: true,
     spinner: document.querySelector('.loader'),
     count: 0,
-    basicStores: 0,
+    storeOne: 0,
+    storeTwo: 0,
+    storeThree: 0,
+    storeFour: 0,
+    storeFive: 0,
   };
   
+  app.storeCost = {
+    storeOne: 15,
+    storeTwo: 50,
+    storeThree: 100,
+    storeFour: 200,
+    storeFive: 1000
+  }
 
   app.updateGameState = function () {
     setInterval(function () {
       app.updateScore();
       document.getElementById("scoreCounter").innerHTML = Math.floor(app.count);
-      document.getElementById("bStoreCounter").innerHTML = app.basicStores;
     }, 350)
   }
   
   app.updateScore = function () {
-    app.count = app.count + (app.basicStores * .3)
+    app.count = app.count + (app.storeOne * .3) + (app.storeTwo * .5) + (app.storeThree * 1) + (app.storeFour * 1.2) + (app.storeFive * 2.5);
   }
   
-  app.increment = function () {
+  app.bake = function () {
     app.count++;
-    document.getElementById("scoreCounter").innerHTML = app.count;
+    document.getElementById("increment").innerHtml = app.count;
   }
   
-  app.incrementStores = function () {
+  app.increment = function (e) {
+    e = e || window.event;
+    e = e.target || e.srcElement;
     
-    if (app.count < 15) {
-      alert("You can't afford this sry");
-    } else {
-      app.count = app.count - 15;
-      app.basicStores++;
+    switch (e.id) {
+      case 'storeOne':
+        if (app.count < app.storeCost.storeOne) {
+          alert ("You can't afford this!");
+        } else {
+          console.log("storeOne")
+          app.count = app.count - app.storeCost.storeOne
+          app.storeOne++;
+        }
+        break;
+      case 'storeTwo':
+        if (app.count < app.storeCost.storeTwo) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeTwo
+          app.storeTwo++;
+        }
+        break;
+      case 'storeThree':
+        if (app.count < app.storeCost.storeThree) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeThree
+          app.storeThree++;
+        }
+        break;
+      case 'storeFour':
+        if (app.count < app.storeCost.storeFour) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeFour
+          app.storeFour++;
+        }
+        break;
+      case 'storeFive':
+        if (app.count < app.storeCost.storeFive) {
+          alert ("You can't afford this!");
+        } else {
+          app.count -= app.storeCost.storeFive
+          app.storeFive++;
+        }
+        break;
+      default:
+        return;
     }
-    document.getElementById("bStoreCounter").innerHTML = app.basicStores;
+    document.getElementById("storeOneCounter").innerHTML = app.storeOne;
+    document.getElementById("storeTwoCounter").innerHTML = app.storeTwo;
+    document.getElementById("storeThreeCounter").innerHTML = app.storeThree;
+    document.getElementById("storeFourCounter").innerHTML = app.storeFour;
+    document.getElementById("storeFiveCounter").innerHTML = app.storeFive;
   }
-  
-  //Add listener onto increment button
-  document.getElementById('increment').addEventListener('click', function() {
-    app.increment();
-  });
-  
-  //Add Listener onto basic store
-  document.getElementById('basic-store').addEventListener('click', function() {
-    app.incrementStores();
+
+  //Adding store increment 
+  $('#storeOne, #storeTwo, #storeThree, #storeFour, #storeFive').on('click', function (e) {
+     app.increment(e);  
+  })
+  $('#increment').on('click', function () {
+    app.bake();
   })
   
+  //Run turn cycle
   app.updateGameState();
 })();
 
